@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+// PatternFly
 import {
   Masthead,
   MastheadBrand,
@@ -12,10 +14,17 @@ import {
   ToolbarContent,
   ToolbarItem,
 } from "@patternfly/react-core";
-import React from "react";
 import BarsIcon from "@patternfly/react-icons/dist/esm/icons/bars-icon";
+// Navigation
+import NavigationRoutes from "navigation/NavigationRoutes";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
+  const [isNavOpen, setIsNavOpen] = useState(true);
+
+  const onNavToggle = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   const headerToolbar = (
     <Toolbar id="toolbar">
       <ToolbarContent>
@@ -27,7 +36,12 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const Header = (
     <Masthead>
       <MastheadToggle>
-        <PageToggleButton variant="plain" aria-label="Global navigation">
+        <PageToggleButton
+          variant="plain"
+          aria-label="Global navigation"
+          isNavOpen={isNavOpen}
+          onNavToggle={onNavToggle}
+        >
           <BarsIcon />
         </PageToggleButton>
       </MastheadToggle>
@@ -44,7 +58,9 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     </Masthead>
   );
 
-  const Sidebar = <PageSidebar nav="Navigation" />;
+  const Sidebar = (
+    <PageSidebar nav={<NavigationRoutes />} isNavOpen={isNavOpen} />
+  );
 
   const pageId = "primary-app-container";
 
