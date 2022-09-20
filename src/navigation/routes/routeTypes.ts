@@ -15,7 +15,7 @@ export interface RouteGroup {
 
 export interface RouteItem {
   component: React.ComponentType<typeof useParams> | React.ComponentType<any>;
-  exact: boolean;
+  // exact: boolean;
   label: string;
   groupId: string;
   path: string;

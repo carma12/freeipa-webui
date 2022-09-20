@@ -20,7 +20,7 @@ import { RouteConfig } from "./routeTypes";
 export const routesIdentity: RouteConfig[] = [
   {
     label: "Users",
-    groupId: "grp-1",
+    groupId: "identity",
     visible: true,
     type: "NavGroup",
     routes: [
@@ -30,7 +30,7 @@ export const routesIdentity: RouteConfig[] = [
         label: "Active users",
         path: "/active-users",
         title: "FreeIPA | Active users",
-        groupId: "grp-1",
+        groupId: "identity",
         visible: true,
         type: "NavItem",
         routes: [
@@ -40,7 +40,7 @@ export const routesIdentity: RouteConfig[] = [
             label: "Active users Settings",
             path: "/active-users/settings",
             title: "FreeIPA | Active users settings",
-            groupId: "grp-1",
+            groupId: "identity",
             visible: false,
             type: "NavItem",
             routes: [
@@ -50,7 +50,7 @@ export const routesIdentity: RouteConfig[] = [
             label: "Active users third-level page",
             path: "/active-users/settings/third-level-page",
             title: "FreeIPA | Active users third-level page",
-            groupId: "grp-1",
+            groupId: "identity",
             visible: false,
             type: "NavItem",
               }
@@ -64,7 +64,7 @@ export const routesIdentity: RouteConfig[] = [
         label: "Stage users",
         path: "/stage-users",
         title: "FreeIPA | Stage users",
-        groupId: "grp-1",
+        groupId: "identity",
         visible: true,
         type: "NavItem",
         routes: [
@@ -74,7 +74,7 @@ export const routesIdentity: RouteConfig[] = [
             label: "Stage users Settings",
             path: "/stage-users/settings",
             title: "FreeIPA | Stage users settings",
-            groupId: "grp-1",
+            groupId: "identity",
             visible: false,
             type: "NavItem",
           },
@@ -86,7 +86,7 @@ export const routesIdentity: RouteConfig[] = [
         label: "Preserved users",
         path: "/preserved-users",
         title: "FreeIPA | Preserved users",
-        groupId: "grp-1",
+        groupId: "identity",
         visible: true,
         type: "NavItem",
         // routes: [

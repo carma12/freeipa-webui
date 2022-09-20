@@ -2,10 +2,12 @@ import React, { useState } from "react";
 // PatternFly
 import { Nav, NavExpandable, NavItem, NavList } from "@patternfly/react-core";
 // React router dom
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 // Routes
 import { RouteItem, RouteGroup } from "./routes/routeTypes";
 import { routesIdentity } from "./routes/identityRoutes";
+// Pages
+import NotFound from "pages/NotFound";
 // import { routesPolicy } from "./routes/policyRoutes";
 
 const NavigationRoutes = () => {
@@ -67,11 +69,7 @@ const NavigationRoutes = () => {
               isActive={subRoute.path === location.pathname}
               to={subRoute.path}
             >
-              <NavLink
-                end={subRoute.exact}
-                to={subRoute.path}
-                style={{ color: "white" }}
-              >
+              <NavLink to={subRoute.path} style={{ color: "white" }}>
                 {subRoute.label}
               </NavLink>
             </NavItem>
@@ -100,7 +98,7 @@ const NavigationRoutes = () => {
         }
         to={route.path}
       >
-        <NavLink end={route.exact} to={route.path} style={{ color: "white" }}>
+        <NavLink to={route.path} style={{ color: "white" }}>
           {route.label}
         </NavLink>
       </NavItem>
@@ -147,15 +145,48 @@ const NavigationRoutes = () => {
     );
   };
 
+  // TEst
+  // Component to render individual routes
+  const GeneratedRoute = (
+    component: React.ReactElement,
+    path: string,
+    idx: string
+  ) => {
+    // function isRouteSelected(route: RouteItem) {
+    //   return route.path === location.pathname || isSelectedChildVisible(route)
+    //     ? true
+    //     : route.path === getParentUrl() &&
+    //         route.routes !== undefined &&
+    //         !isSelectedChildVisible(route);
+    // }
+
+    return <Route path={path} element={component} />;
+  };
+
+  // Page not found
+  const PageNotFound = () => {
+    return <Route element={NotFound} />;
+  };
+
+  // Component to render all routes
+  const AppRoutes = (): React.ReactElement => (
+    <Routes>
+      {routesIdentity.map((path, element, idx) => (
+        <GeneratedRoute path={path} component={element} key={idx} />
+      ))}
+      <PageNotFound />
+    </Routes>
+  );
+
   // Render 'Navigation'
   return (
     <Nav onSelect={onSelect}>
       <NavList>
         <NavExpandable
           title="Identity"
-          groupId="grp-1"
-          isActive={activeGroup === "grp-1"}
-          isExpanded={activeGroup === "grp-1"}
+          groupId="identity"
+          isActive={activeGroup === "identity"}
+          isExpanded={activeGroup === "identity"}
         >
           {routesIdentity.map(
             (route, idx) =>
