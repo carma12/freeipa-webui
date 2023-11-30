@@ -20,11 +20,14 @@
     "noEmit": false,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "paths": {
-      "@badeball/cypress-cucumber-preprocessor/*": [
-        "./node_modules/@badeball/cypress-cucumber-preprocessor/dist/subpath-entrypoints/*"
-      ]
-    }
+    // "typeRoots": ["./node_modules/@types"]
+    //"types": ["jest", "@testing-library/jest-dom", "@testing-library/react"],
   },
-  "exclude": ["node_modules"]
+  // "include": [
+  //   "./src/setupTests.ts"
+  // ],
+  // "exclude": ["node_modules"],
+  "exclude": ["cypress.config.ts", "cypress", "node_modules"],
+  // "types": ["node", "jest", "@testing-library/jest-dom"]
+  "types": ["jest", "@testing-library/jest-dom", "@testing-library/react"],
 }
