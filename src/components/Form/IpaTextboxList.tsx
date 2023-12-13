@@ -74,7 +74,7 @@ const IpaTextboxList = (props: PropsToIpaTextboxList) => {
                 type="text"
                 name={props.name + "-" + idx}
                 aria-label={props.ariaLabel + " number " + idx}
-                onChange={(value, event) => onChangeHandler(value, event, idx)}
+                onChange={(event, value) => onChangeHandler(value, event, idx)}
               />
             </FlexItem>
             <FlexItem key={props.name + "-" + idx + "-delete-button"}>
@@ -89,7 +89,7 @@ const IpaTextboxList = (props: PropsToIpaTextboxList) => {
         ))}
       </Flex>
       <SecondaryButton
-        classname="pf-u-mt-sm"
+        classname="pf-v5-u-mt-sm"
         name={"add-" + props.name}
         onClickHandler={onAddHandler}
       >

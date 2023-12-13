@@ -9,6 +9,7 @@ import {
   PaginationVariant,
   TextVariants,
 } from "@patternfly/react-core";
+// import { DropdownItem } from "@patternfly/react-core/deprecated";
 import {
   InnerScrollContainer,
   OuterScrollContainer,
@@ -317,8 +318,8 @@ const Hosts = () => {
     </DropdownItem>,
   ];
 
-  const onKebabToggle = (isOpen: boolean) => {
-    setKebabIsOpen(isOpen);
+  const onKebabToggle = () => {
+    setKebabIsOpen(!kebabIsOpen);
   };
 
   const onFocus = () => {
@@ -526,7 +527,7 @@ const Hosts = () => {
           subTextIsVisitedLink={true}
           textContent="Help"
           icon={
-            <OutlinedQuestionCircleIcon className="pf-u-primary-color-100 pf-u-mr-sm" />
+            <OutlinedQuestionCircleIcon className="pf-v5-u-primary-color-100 pf-v5-u-mr-sm" />
           }
         />
       ),
@@ -553,11 +554,11 @@ const Hosts = () => {
       <PageSection
         variant={PageSectionVariants.light}
         isFilled={false}
-        className="pf-u-m-lg pf-u-pb-md pf-u-pl-0 pf-u-pr-0"
+        className="pf-v5-u-m-lg pf-v5-u-pb-md pf-v5-u-pl-0 pf-v5-u-pr-0"
       >
         <ToolbarLayout
-          className="pf-u-pt-0 pf-u-pl-lg pf-u-pr-md"
-          contentClassName="pf-u-p-0"
+          className="pf-v5-u-pt-0 pf-v5-u-pl-lg pf-v5-u-pr-md"
+          contentClassName="pf-v5-u-p-0"
           toolbarItems={toolbarItems}
         />
         <div style={{ height: `calc(100vh - 350px)` }}>
@@ -585,7 +586,7 @@ const Hosts = () => {
           variant={PaginationVariant.bottom}
           widgetId="pagination-options-menu-bottom"
           perPageComponent="button"
-          className="pf-u-pb-0 pf-u-pr-md"
+          className="pf-v5-u-pb-0 pf-v5-u-pr-md"
         />
       </PageSection>
       <ModalErrors errors={modalErrors.getAll()} />

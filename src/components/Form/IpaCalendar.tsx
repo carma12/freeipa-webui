@@ -6,6 +6,7 @@ import {
   TimePicker,
   isValidDate,
   yyyyMMddFormat,
+  InputGroupItem,
 } from "@patternfly/react-core";
 // Utils
 import {
@@ -196,23 +197,27 @@ const IpaCalendar = (props: IPAParamDefinition) => {
 
   return (
     <InputGroup>
-      <DatePicker
-        name={"add-date-" + props.name}
-        value={valueDate !== null ? yyyyMMddFormat(valueDate) : ""}
-        onChange={onDateChange}
-        aria-label="Kerberos principal expiration date"
-        placeholder="YYYY-MM-DD"
-        isDisabled={readOnly}
-      />
-      <TimePicker
-        name={"add-time-" + props.name}
-        time={valueDate !== null ? hhMMFormat(valueDate) : ""}
-        aria-label="Kerberos principal expiration time"
-        onChange={onTimeChange}
-        placeholder="HH:MM"
-        is24Hour={true}
-        isDisabled={readOnly}
-      />
+      <InputGroupItem>
+        <DatePicker
+          name={"add-date-" + props.name}
+          value={valueDate !== null ? yyyyMMddFormat(valueDate) : ""}
+          onChange={onDateChange}
+          aria-label="Kerberos principal expiration date"
+          placeholder="YYYY-MM-DD"
+          isDisabled={readOnly}
+        />
+      </InputGroupItem>
+      <InputGroupItem>
+        <TimePicker
+          name={"add-time-" + props.name}
+          time={valueDate !== null ? hhMMFormat(valueDate) : ""}
+          aria-label="Kerberos principal expiration time"
+          onChange={onTimeChange}
+          placeholder="HH:MM"
+          is24Hour={true}
+          isDisabled={readOnly}
+        />
+      </InputGroupItem>
     </InputGroup>
   );
 };

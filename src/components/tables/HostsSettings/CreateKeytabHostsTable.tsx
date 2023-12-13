@@ -164,7 +164,7 @@ const CreateKeytabHostsTable = (props: PropsToTable) => {
           onSelect: (_event, isSelecting) =>
             onSelectHost(host, rowIndex, isSelecting),
           isSelected: isHostSelected(host),
-          disable: false,
+          isDisabled: false,
         }}
       />
       <Td dataLabel={hostsColumnNamesArray[0]}>{host}</Td>
@@ -212,11 +212,11 @@ const CreateKeytabHostsTable = (props: PropsToTable) => {
         isStickyHeader={false}
         tableHeader={hostsHeader}
         tableBody={hostsBody}
-        tableClasses="pf-u-mb-2xl"
-        deleteButtonClasses="pf-u-mr-sm"
+        tableClasses="pf-v5-u-mb-2xl"
+        deleteButtonClasses="pf-v5-u-mr-sm"
         onDeleteModal={onClickDeleteHandler}
         isDeleteDisabled={isDeleteDisabled}
-        addButtonClasses="pf-u-mr-sm"
+        addButtonClasses="pf-v5-u-mr-sm"
         onAddModal={onClickAddHandler}
       />
       {showAddModal && (

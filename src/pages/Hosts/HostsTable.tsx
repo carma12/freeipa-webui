@@ -268,7 +268,7 @@ const HostsTable = (props: PropsToTable) => {
           onSelect: (_event, isSelecting) =>
             onSelectHost(host, rowIndex, isSelecting),
           isSelected: isHostSelected(host),
-          disable: !props.hostsData.isHostSelectable(host),
+          isDisabled: !props.hostsData.isHostSelectable(host),
         }}
       />
       <Td dataLabel={columnNames.fqdn}>
@@ -296,7 +296,7 @@ const HostsTable = (props: PropsToTable) => {
       ariaLabel={"Hosts table"}
       variant={"compact"}
       hasBorders={true}
-      classes={"pf-u-mt-md"}
+      classes={"pf-v5-u-mt-md"}
       tableId={"hosts-table"}
       isStickyHeader={true}
       tableHeader={header}

@@ -165,7 +165,7 @@ const CreateKeytabUsersTable = (props: PropsToTable) => {
           onSelect: (_event, isSelecting) =>
             onSelectUser(user, rowIndex, isSelecting),
           isSelected: isUserSelected(user),
-          disable: false,
+          isDisabled: false,
         }}
       />
       <Td dataLabel={usersColumnNamesArray[0]}>{user}</Td>
@@ -213,11 +213,11 @@ const CreateKeytabUsersTable = (props: PropsToTable) => {
         isStickyHeader={false}
         tableHeader={usersHeader}
         tableBody={usersBody}
-        tableClasses="pf-u-mb-3xl"
-        deleteButtonClasses="pf-u-mr-sm"
+        tableClasses="pf-v5-u-mb-3xl"
+        deleteButtonClasses="pf-v5-u-mr-sm"
         onDeleteModal={onClickDeleteHandler}
         isDeleteDisabled={isDeleteDisabled}
-        addButtonClasses="pf-u-mr-sm"
+        addButtonClasses="pf-v5-u-mr-sm"
         onAddModal={onClickAddHandler}
       />
       {showAddModal && (

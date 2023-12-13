@@ -1,8 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
 // PatternFly
 import {
-  DropdownDirection,
-  DropdownItem,
   Flex,
   JumpLinks,
   JumpLinksItem,
@@ -13,6 +11,10 @@ import {
   SidebarPanel,
   TextVariants,
 } from "@patternfly/react-core";
+import {
+  DropdownDirection,
+  DropdownItem,
+} from "@patternfly/react-core/deprecated";
 // Icons
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
 // Data types
@@ -49,8 +51,8 @@ const HostsSettings = (props: PropsToHostsSettings) => {
     <DropdownItem key="new certificate">New certificate</DropdownItem>,
   ];
 
-  const onKebabToggle = (isOpen: boolean) => {
-    setIsKebabOpen(isOpen);
+  const onKebabToggle = () => {
+    setIsKebabOpen(!isKebabOpen);
   };
 
   const onKebabSelect = (
@@ -93,19 +95,19 @@ const HostsSettings = (props: PropsToHostsSettings) => {
       <PageSection
         id="settings-page"
         variant={PageSectionVariants.light}
-        className="pf-u-pr-0 pf-u-ml-lg pf-u-mr-sm"
+        className="pf-v5-u-pr-0 pf-v5-u-ml-lg pf-v5-u-mr-sm"
         style={{ overflowY: "scroll", height: `calc(100vh - 319px)` }}
       >
-        <Sidebar isPanelRight className="pf-u-mt-lg">
+        <Sidebar isPanelRight className="pf-v5-u-mt-lg">
           <SidebarPanel variant="sticky">
             <HelpTextWithIconLayout
               textComponent={TextVariants.p}
-              textClassName="pf-u-mb-md"
+              textClassName="pf-v5-u-mb-md"
               subTextComponent={TextVariants.a}
               subTextIsVisitedLink={true}
               textContent="Help"
               icon={
-                <OutlinedQuestionCircleIcon className="pf-u-primary-color-100 pf-u-mr-sm" />
+                <OutlinedQuestionCircleIcon className="pf-v5-u-primary-color-100 pf-v5-u-mr-sm" />
               }
             />
             <JumpLinks
@@ -133,7 +135,7 @@ const HostsSettings = (props: PropsToHostsSettings) => {
             </JumpLinks>
           </SidebarPanel>
 
-          <SidebarContent className="pf-u-mr-xl">
+          <SidebarContent className="pf-v5-u-mr-xl">
             <Flex
               direction={{ default: "column" }}
               flex={{ default: "flex_1" }}
@@ -179,7 +181,7 @@ const HostsSettings = (props: PropsToHostsSettings) => {
       </PageSection>
       <ToolbarLayout
         isSticky={true}
-        className={"pf-u-p-md pf-u-ml-lg pf-u-mr-lg"}
+        className={"pf-v5-u-p-md pf-v5-u-ml-lg pf-v5-u-mr-lg"}
         toolbarItems={toolbarFields}
       />
     </>

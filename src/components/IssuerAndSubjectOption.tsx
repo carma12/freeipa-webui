@@ -53,12 +53,14 @@ const IssuerAndSubjectOption = (props: PropsToIssuerAndSubjectOption) => {
       <Radio
         isChecked={props.isIssuerAndSubjectChecked}
         name="issuer-and-subject-radio"
-        onChange={props.onChangeIssuerAndSubjectCheck}
+        onChange={(_event, checked) =>
+          props.onChangeIssuerAndSubjectCheck(checked)
+        }
         label="Issuer and subject"
         id="issuer-and-subject"
-        className="pf-u-mb-md"
+        className="pf-v5-u-mb-md"
       />
-      <div className="pf-u-ml-lg pf-u-mb-md">
+      <div className="pf-v5-u-ml-lg pf-v5-u-mb-md">
         <Form>
           <FormGroup
             label="Issuer"
@@ -77,7 +79,7 @@ const IssuerAndSubjectOption = (props: PropsToIssuerAndSubjectOption) => {
               type="text"
               name="issuer"
               aria-label="issuer textbox"
-              onChange={onChangeIssuer}
+              onChange={(_event, value: string) => onChangeIssuer(value)}
               isDisabled={!props.isIssuerAndSubjectChecked}
               placeholder="O=EXAMPLE.ORG,CN=Issuer Example CA"
             />
@@ -99,7 +101,7 @@ const IssuerAndSubjectOption = (props: PropsToIssuerAndSubjectOption) => {
               type="text"
               name="subject"
               aria-label="subject textbox"
-              onChange={onChangeSubject}
+              onChange={(_event, value: string) => onChangeSubject(value)}
               isDisabled={!props.isIssuerAndSubjectChecked}
               placeholder="CN=Subject example,O=EXAMPLE.ORG"
             />

@@ -400,7 +400,7 @@ const UsersTable = (props: PropsToTable) => {
           onSelect: (_event, isSelecting) =>
             onSelectUser(user, rowIndex, isSelecting),
           isSelected: isUserSelected(user),
-          disable: !props.usersData.isUserSelectable(user),
+          isDisabled: !props.usersData.isUserSelectable(user),
         }}
       />
       <Td
@@ -479,7 +479,7 @@ const UsersTable = (props: PropsToTable) => {
       ariaLabel={props.from.replace("-", " ") + " table"}
       variant={"compact"}
       hasBorders={true}
-      classes={"pf-u-mt-md"}
+      classes={"pf-v5-u-mt-md"}
       tableId={props.from + "-table"}
       isStickyHeader={true}
       tableHeader={header}

@@ -72,7 +72,10 @@ const IpaCertificateMappingData = (props: PropsToIpaCertificateMappingData) => {
   const [isIssuerAndSubjectChecked, setIsIssuerAndSubjectChecked] =
     React.useState(false);
 
-  const onChangeCertMappingDataCheck = (value: boolean) => {
+  const onChangeCertMappingDataCheck = (
+    event: React.FormEvent<HTMLInputElement>,
+    value: boolean
+  ) => {
     setIsCertMappingDataChecked(value);
     setIsIssuerAndSubjectChecked(!value);
   };
@@ -90,6 +93,10 @@ const IpaCertificateMappingData = (props: PropsToIpaCertificateMappingData) => {
   const [certificateMappingDataList, setCertificateMappingDataList] =
     React.useState<string[]>([]);
   const [certificatesList, setCertificatesList] = React.useState<string[]>([]);
+
+  const updateCertificateList = (value: string[]) => {
+    setCertificatesList(value);
+  };
 
   // Deletion modal
   const [isDeletionModalOpen, setIsDeletionModalOpen] = React.useState(false);
@@ -284,7 +291,7 @@ const IpaCertificateMappingData = (props: PropsToIpaCertificateMappingData) => {
               <Flex
                 key={"flex-" + idx}
                 flex={{ default: "flex_1" }}
-                className="pf-u-mb-sm"
+                className="pf-v5-u-mb-sm"
                 flexWrap={{ default: "nowrap" }}
               >
                 <FlexItem>
@@ -322,7 +329,7 @@ const IpaCertificateMappingData = (props: PropsToIpaCertificateMappingData) => {
             onChangeCertMappingDataCheck={onChangeCertMappingDataCheck}
             setIsAddButtonDisabled={setIsAddButtonDisabled}
             certificatesList={certificatesList}
-            setCertificateList={setCertificatesList}
+            setCertificateList={updateCertificateList}
             certificateMappingDataList={certificateMappingDataList}
             setCertificateMappingDataList={setCertificateMappingDataList}
           />

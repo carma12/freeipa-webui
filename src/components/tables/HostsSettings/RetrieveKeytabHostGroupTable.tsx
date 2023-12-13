@@ -177,7 +177,7 @@ const RetrieveKeytabHostGroupsTable = (props: PropsToTable) => {
           onSelect: (_event, isSelecting) =>
             onSelectHostGroup(hostGroup, rowIndex, isSelecting),
           isSelected: isHostGroupSelected(hostGroup),
-          disable: false,
+          isDisabled: false,
         }}
       />
       <Td dataLabel={hostGroupsColumnNamesArray[0]}>{hostGroup}</Td>
@@ -225,11 +225,11 @@ const RetrieveKeytabHostGroupsTable = (props: PropsToTable) => {
         isStickyHeader={false}
         tableHeader={hostGroupsHeader}
         tableBody={hostGroupsBody}
-        tableClasses="pf-u-mb-2xl"
-        deleteButtonClasses="pf-u-mr-sm"
+        tableClasses="pf-v5-u-mb-2xl"
+        deleteButtonClasses="pf-v5-u-mr-sm"
         onDeleteModal={onClickDeleteHandler}
         isDeleteDisabled={isDeleteDisabled}
-        addButtonClasses="pf-u-mr-sm"
+        addButtonClasses="pf-v5-u-mr-sm"
         onAddModal={onClickAddHandler}
       />
       {showAddModal && (

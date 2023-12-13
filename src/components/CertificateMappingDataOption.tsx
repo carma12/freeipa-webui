@@ -15,7 +15,10 @@ import SecondaryButton from "./layouts/SecondaryButton";
 
 interface PropsToCertificateMappingDataOption {
   isCertMappingDataChecked: boolean;
-  onChangeCertMappingDataCheck: (value: boolean) => void;
+  onChangeCertMappingDataCheck: (
+    event: React.FormEvent<HTMLInputElement>,
+    value: boolean
+  ) => void;
   setIsAddButtonDisabled: (value: boolean) => void;
   certificatesList: string[];
   setCertificateList: (value: string[]) => void;
@@ -98,7 +101,7 @@ const CertificateMappingDataOption = (
                 type="text"
                 name={"ipacertmapdata-" + idx}
                 aria-label="certificate mapping data textbox"
-                onChange={(value, event) =>
+                onChange={(event, value) =>
                   onHandleCertificateMappingDataChange(value, event, idx)
                 }
               />
@@ -117,7 +120,7 @@ const CertificateMappingDataOption = (
         ))}
       </Flex>
       <SecondaryButton
-        classname="pf-u-mt-sm pf-u-mb-0"
+        classname="pf-v5-u-mt-sm pf-v5-u-mb-0"
         isDisabled={!props.isCertMappingDataChecked}
         onClickHandler={onAddCertificateMappingDataHandler}
       >
@@ -172,7 +175,7 @@ const CertificateMappingDataOption = (
                 name={"certificate-" + idx}
                 aria-label="certificate textarea"
                 resizeOrientation="vertical"
-                onChange={(value, event) =>
+                onChange={(event, value) =>
                   onHandleCertificateChange(value, event, idx)
                 }
                 style={{ height: "135px" }}
@@ -190,7 +193,7 @@ const CertificateMappingDataOption = (
         ))}
       </Flex>
       <SecondaryButton
-        classname="pf-u-mt-sm"
+        classname="pf-v5-u-mt-sm"
         isDisabled={!props.isCertMappingDataChecked}
         onClickHandler={onAddCertificateHandler}
       >
@@ -214,9 +217,9 @@ const CertificateMappingDataOption = (
         onChange={props.onChangeCertMappingDataCheck}
         label="Certificate mapping data"
         id="certificate-mapping-data"
-        className="pf-u-mb-md"
+        className="pf-v5-u-mb-md"
       />
-      <div className="pf-u-ml-lg pf-u-mb-md">
+      <div className="pf-v5-u-ml-lg pf-v5-u-mb-md">
         <Form>
           <FormGroup
             label="Certificate mapping data"

@@ -50,6 +50,10 @@ const PrincipalAliasMultiTextBox = (props: PrincipalAliasMultiTextBoxProps) => {
   const [isTextInputModalOpen, setIsTextInputModalOpen] = React.useState(false);
   const [newAliasValue, setNewAliasValue] = React.useState("");
 
+  const updateNewAliasValue = (value: string) => {
+    setNewAliasValue(value);
+  };
+
   const onOpenTextInputModal = () => {
     setIsTextInputModalOpen(true);
   };
@@ -204,7 +208,7 @@ const PrincipalAliasMultiTextBox = (props: PrincipalAliasMultiTextBoxProps) => {
       />
       <AddTextInputFromListModal
         newValue={newAliasValue}
-        setNewValue={setNewAliasValue}
+        setNewValue={updateNewAliasValue}
         title={"Add kerberos principal alias"}
         isOpen={isTextInputModalOpen}
         onClose={onCloseTextInputModal}
