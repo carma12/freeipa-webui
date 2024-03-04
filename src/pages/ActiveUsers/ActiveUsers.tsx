@@ -58,8 +58,13 @@ import { SerializedError } from "@reduxjs/toolkit";
 import useApiError from "src/hooks/useApiError";
 import GlobalErrors from "src/components/errors/GlobalErrors";
 import ModalErrors from "src/components/errors/ModalErrors";
+// i18n
+import { useTranslation } from "react-i18next";
 
 const ActiveUsers = () => {
+  // Translations
+  const { t } = useTranslation();
+
   // Dispatch (Redux)
   const dispatch = useAppDispatch();
 
@@ -720,7 +725,8 @@ const ActiveUsers = () => {
         <TitleLayout
           id="active users title"
           headingLevel="h1"
-          text="Active Users"
+          // text="Active Users"
+          text={t("activeUsers")}
         />
       </PageSection>
       <PageSection

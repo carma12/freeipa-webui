@@ -15,6 +15,8 @@ import {
   Dropdown,
   MenuToggleElement,
   MenuToggle,
+  Select,
+  SelectOption,
 } from "@patternfly/react-core";
 import React from "react";
 // Icons
@@ -29,6 +31,8 @@ import Navigation from "./navigation/Nav";
 // Images
 import headerLogo from "public/images/header-logo.png";
 import avatarImg from "public/images/avatarImg.svg";
+// i18n
+import { useTranslation } from "react-i18next";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const headerToolbar = <Toolbar id="toolbar" />;
@@ -84,6 +88,69 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     </Dropdown>
   );
 
+  // UTILITY: Language switcher
+  // Used for i18n testing purposes
+  const [isLangSelectOpen, setIsLangSelectOpen] = React.useState(false);
+  const [langSelected, setLangSelected] = React.useState("English");
+
+  const { i18n } = useTranslation();
+
+  const onLangSelectToggle = () => {
+    setIsLangSelectOpen(!isLangSelectOpen);
+  };
+
+  const onLangSelect = (
+    _event: React.MouseEvent<Element, MouseEvent> | undefined,
+    value?: string | number
+  ) => {
+    if (value !== undefined) {
+      switch (value) {
+        case "English":
+          changeLang("en");
+          break;
+        case "Spanish":
+          changeLang("es");
+          break;
+        default:
+          changeLang("en");
+          break;
+      }
+      setLangSelected(value.toString());
+    }
+    setIsLangSelectOpen(false);
+  };
+
+  const changeLang = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
+  const languageSwitcher = (
+    <Select
+      onSelect={onLangSelect}
+      selected={langSelected}
+      toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+        <MenuToggle
+          ref={toggleRef}
+          id="toggle-plain-text"
+          isExpanded={isLangSelectOpen}
+          onClick={onLangSelectToggle}
+          className="pf-v5-u-mr-md"
+          variant="plainText"
+        >
+          {langSelected}
+        </MenuToggle>
+      )}
+      isOpen={isLangSelectOpen}
+    >
+      <SelectOption key="english" value={"English"}>
+        English
+      </SelectOption>
+      <SelectOption key="spanish" value={"Spanish"}>
+        Spanish
+      </SelectOption>
+    </Select>
+  );
+
   const Header = (
     <Masthead>
       <MastheadToggle>
@@ -100,6 +167,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
         <>
           {headerToolbar}
           {dropdown}
+          {languageSwitcher}
           <Avatar src={avatarImg} alt="avatar" size="md" />
         </>
       </MastheadContent>

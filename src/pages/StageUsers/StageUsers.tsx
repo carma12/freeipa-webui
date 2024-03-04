@@ -51,8 +51,13 @@ import {
 import useApiError from "src/hooks/useApiError";
 import GlobalErrors from "src/components/errors/GlobalErrors";
 import ModalErrors from "src/components/errors/ModalErrors";
+// i18n
+import { useTranslation } from "react-i18next";
 
 const StageUsers = () => {
+  // Translations
+  const { t } = useTranslation();
+
   // Initialize stage users list (Redux)
   const dispatch = useAppDispatch();
 
@@ -518,7 +523,8 @@ const StageUsers = () => {
         <TitleLayout
           id="stage users title"
           headingLevel="h1"
-          text="Stage users"
+          // Before: text="Stage users"
+          text={t("stageUsers")}
         />
       </PageSection>
       <PageSection
