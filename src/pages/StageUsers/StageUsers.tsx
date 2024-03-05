@@ -6,6 +6,8 @@ import {
   PageSectionVariants,
   TextVariants,
   PaginationVariant,
+  TextContent,
+  Title,
 } from "@patternfly/react-core";
 // PatternFly table
 import {
@@ -51,6 +53,8 @@ import {
 import useApiError from "src/hooks/useApiError";
 import GlobalErrors from "src/components/errors/GlobalErrors";
 import ModalErrors from "src/components/errors/ModalErrors";
+// i18n
+import { FormattedMessage } from "react-intl";
 
 const StageUsers = () => {
   // Initialize stage users list (Redux)
@@ -515,11 +519,17 @@ const StageUsers = () => {
     <Page>
       <alerts.ManagedAlerts />
       <PageSection variant={PageSectionVariants.light}>
-        <TitleLayout
-          id="stage users title"
-          headingLevel="h1"
-          text="Stage users"
-        />
+        {/* Before, by using the 'TitleLayout' component:
+          <TitleLayout
+            id="stage users title"
+            headingLevel="h1"
+            text="Stage users"
+          /> */}
+        <TextContent key={"stage users title"}>
+          <Title headingLevel={"h1"} id={"stage users title"}>
+            <FormattedMessage id="stageUsers" />
+          </Title>
+        </TextContent>
       </PageSection>
       <PageSection
         variant={PageSectionVariants.light}

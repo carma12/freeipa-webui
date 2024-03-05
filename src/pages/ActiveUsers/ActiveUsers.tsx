@@ -8,6 +8,8 @@ import {
   PaginationVariant,
   Button,
   DropdownItem,
+  TextContent,
+  Title,
 } from "@patternfly/react-core";
 // PatternFly table
 import {
@@ -58,6 +60,8 @@ import { SerializedError } from "@reduxjs/toolkit";
 import useApiError from "src/hooks/useApiError";
 import GlobalErrors from "src/components/errors/GlobalErrors";
 import ModalErrors from "src/components/errors/ModalErrors";
+// i18n
+import { FormattedMessage } from "react-intl";
 
 const ActiveUsers = () => {
   // Dispatch (Redux)
@@ -717,11 +721,18 @@ const ActiveUsers = () => {
     <Page>
       <alerts.ManagedAlerts />
       <PageSection variant={PageSectionVariants.light}>
-        <TitleLayout
-          id="active users title"
-          headingLevel="h1"
-          text="Active Users"
-        />
+        {/* Before, by using the 'TitleLayout' component:
+            <TitleLayout
+              id="active users title"
+              headingLevel="h1"
+              text="Active Users"
+            /> */}
+        {/* Now: explicitely using PF5 component */}
+        <TextContent key={"active users title"}>
+          <Title headingLevel={"h1"} id={"active users title"}>
+            <FormattedMessage id="activeUsers" />
+          </Title>
+        </TextContent>
       </PageSection>
       <PageSection
         variant={PageSectionVariants.light}

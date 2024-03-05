@@ -21,6 +21,9 @@ import {
   updateCaIsEnabled,
   updateVaultConfiguration,
 } from "src/store/Global/global-slice";
+// i18n
+import { languages } from "src/lang/i18n";
+import { IntlProvider } from "react-intl";
 
 // Context
 export const Context = React.createContext<{
@@ -30,6 +33,8 @@ export const Context = React.createContext<{
   setBrowserTitle: React.Dispatch<any>;
   superGroupActive: string;
   setSuperGroupActive: React.Dispatch<any>;
+  locale: string;
+  setLocale: React.Dispatch<string>;
 }>({
   groupActive: "active-users",
   setGroupActive: () => null,
@@ -37,9 +42,14 @@ export const Context = React.createContext<{
   setBrowserTitle: () => null,
   superGroupActive: "users",
   setSuperGroupActive: () => null,
+  locale: "en",
+  setLocale: () => null,
 });
 
 const App: React.FunctionComponent = () => {
+  // i18n
+  const [locale, setLocale] = React.useState("en");
+
   // Dispatch (Redux)
   const dispatch = useAppDispatch();
 
@@ -126,18 +136,26 @@ const App: React.FunctionComponent = () => {
         setBrowserTitle,
         superGroupActive,
         setSuperGroupActive,
+        locale,
+        setLocale,
       }}
     >
-      <AppLayout>
-        {!isInitialBatchLoading ? (
-          <AppRoutes />
-        ) : (
-          <Spinner
-            style={{ alignSelf: "center", marginTop: "15%" }}
-            aria-label="Spinner waiting to load page"
-          />
-        )}
-      </AppLayout>
+      <IntlProvider
+        locale={locale}
+        defaultLocale="en"
+        messages={languages[locale]}
+      >
+        <AppLayout>
+          {!isInitialBatchLoading ? (
+            <AppRoutes />
+          ) : (
+            <Spinner
+              style={{ alignSelf: "center", marginTop: "15%" }}
+              aria-label="Spinner waiting to load page"
+            />
+          )}
+        </AppLayout>
+      </IntlProvider>
     </Context.Provider>
   );
 };
