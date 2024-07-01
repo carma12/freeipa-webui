@@ -105,6 +105,7 @@ const ServicesMemberOf = (props: PropsToServicesMemberOf) => {
               isDataLoading={serviceQuery.isFetching}
               onRefreshData={onRefreshServiceData}
               memberof_role={service.memberof_role as string[]}
+              membershipDisabled={true}
             />
           </Tab>
         </Tabs>
