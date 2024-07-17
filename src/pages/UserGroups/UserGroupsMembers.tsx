@@ -22,6 +22,7 @@ import MembersUsers from "src/components/Members/MembersUsers";
 import MembersUserGroups from "src/components/Members/MembersUserGroups";
 import MembersServices from "src/components/Members/MembersServices";
 import MembersExternal from "src/components/Members/MembersExternal";
+import MembersUserIDOverrides from "src/components/Members/MembersUserIdOverrides";
 
 interface PropsToUserGroupsMembers {
   userGroup: UserGroup;
@@ -86,7 +87,14 @@ const UserGroupsMembers = (props: PropsToUserGroupsMembers) => {
     }
   }, [userGroup]);
 
-  // TODO: Add the rest of the tab lengths here
+  // 'User ID overrides' length to show in tab badge
+  const [idOverridesLength, setIdOverridesLength] = React.useState(0);
+
+  React.useEffect(() => {
+    if (userGroup && userGroup.member_idoverrideuser) {
+      setIdOverridesLength(userGroup.member_idoverrideuser.length);
+    }
+  }, [userGroup]);
 
   // Tab
   const [activeTabKey, setActiveTabKey] = useState(props.tabSection);
@@ -199,6 +207,30 @@ const UserGroupsMembers = (props: PropsToUserGroupsMembers) => {
               isDataLoading={userGroupQuery.isFetching}
               onRefreshData={onRefreshUserGroupData}
               member_external={userGroup.member_external || []}
+            />
+          </Tab>
+          <Tab
+            eventKey={"member_idoverrideuser"}
+            name="member_idoverrideuser"
+            title={
+              <TabTitleText>
+                User ID overrides{" "}
+                <Badge key={4} isRead>
+                  {idOverridesLength}
+                </Badge>
+              </TabTitleText>
+            }
+          >
+            <MembersUserIDOverrides
+              entity={userGroup}
+              id={userGroup.cn as string}
+              from="user-groups"
+              isDataLoading={userGroupQuery.isFetching}
+              onRefreshData={onRefreshUserGroupData}
+              member_idoverrideuser={userGroup.member_idoverrideuser || []}
+              memberindirect_idoverrideuser={
+                userGroup.memberindirect_idoverrideuser || []
+              }
             />
           </Tab>
         </Tabs>

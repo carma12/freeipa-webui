@@ -142,6 +142,10 @@ export const AppRoutes = (): React.ReactElement => (
           path="member_external"
           element={<UserGroupsTabs section="member_external" />}
         />
+        <Route
+          path="member_idoverrideuser"
+          element={<UserGroupsTabs section="member_idoverrideuser" />}
+        />
       </Route>
     </Route>
     <Route path="host-groups">
