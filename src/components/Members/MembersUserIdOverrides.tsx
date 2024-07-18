@@ -18,12 +18,17 @@ import useAlerts from "src/hooks/useAlerts";
 import useListPageSearchParams from "src/hooks/useListPageSearchParams";
 // RPC
 import { ErrorResult } from "src/services/rpc";
-
 import {
   MemberPayload,
   useAddAsMemberMutation,
   useRemoveAsMemberMutation,
 } from "src/services/rpcUserGroups";
+import {
+  useGetIdViewsQuery,
+  useGetUserIdOverridesInfoByGroupQuery,
+  useGetUserIdOverridesInfoByUidQuery,
+} from "src/services/rpcIdOverride";
+// Utils
 import { API_VERSION_BACKUP, paginate } from "src/utils/utils";
 import { apiToUserIDOverride } from "src/utils/userIdOverrideUtils";
 
@@ -97,13 +102,13 @@ const MembersUserIDOverrides = (props: PropsToMembersUserIDOverrides) => {
   >(getIdOverridesNameToLoad());
 
   // Load User ID overrides
-  const fullIdOverridesQuery = useGetIdOverridesInfoByUidQuery(
+  const fullIdOverridesQuery = useGetUserIdOverridesInfoByUidQuery(
     idOverrideNamesToLoad
   );
 
   // Refresh User ID overrides
   React.useEffect(() => {
-    const idOverridesNames = getIdOverrideNameToLoad();
+    const idOverridesNames = getIdOverridesNameToLoad();
     setIdOverrideNamesToLoad(idOverridesNames);
   }, [props.entity, membershipDirection, searchValue, page, perPage]);
 
@@ -134,8 +139,8 @@ const MembersUserIDOverrides = (props: PropsToMembersUserIDOverrides) => {
   const someItemSelected = idOverridesSelected.length > 0;
   const showTableRows = idOverrides.length > 0;
   const entityType = getEntityType();
-  const idOverrideColumnNames = ["User to override"];
-  const idOverrideProperties = ["uid"];
+  const idOverrideColumnNames = ["User to override, Description"];
+  const idOverrideProperties = ["uid, description"];
 
   // Dialogs and actions
   const [showAddModal, setShowAddModal] = React.useState(false);
@@ -162,43 +167,84 @@ const MembersUserIDOverrides = (props: PropsToMembersUserIDOverrides) => {
   );
 
   // Load available User ID overrides, delay the search for opening the modal
-  const idOverridesQuery = useGettingIdOverridesQuery({
-    search: adderSearchValue,
-    apiVersion: API_VERSION_BACKUP,
-    sizelimit: 100,
-    startIdx: 0,
-    stopIdx: 100,
-  });
+  // const idOverridesQuery = useGettingIdOverridesQuery({
+  //   search: adderSearchValue,
+  //   apiVersion: API_VERSION_BACKUP,
+  //   sizelimit: 100,
+  //   startIdx: 0,
+  //   stopIdx: 100,
+  // });
 
-  // Trigger available User ID overrides search
+  // // Trigger available User ID overrides search
+  // React.useEffect(() => {
+  //   if (showAddModal) {
+  //     idOverridesQuery.refetch();
+  //   }
+  // }, [showAddModal, adderSearchValue, props.entity]);
+
+  // // Update available User ID overrides
+  // React.useEffect(() => {
+  //   if (idOverridesQuery.data && !idOverridesQuery.isFetching) {
+  //     // transform data to User ID overrides
+  //     const count = idOverridesQuery.data.result.count;
+  //     const results = idOverridesQuery.data.result.results;
+  //     let items: AvailableItems[] = [];
+  //     const avalIdOverrides: UserIDOverride[] = [];
+  //     for (let i = 0; i < count; i++) {
+  //       const idOverride = apiToUserIDOverride(results[i].result);
+  //       avalIdOverrides.push(idOverride);
+  //       items.push({
+  //         key: idOverride.uid,
+  //         title: idOverride.uid,
+  //       });
+  //     }
+  //     items = items.filter((item) => !member_idoverrideuser.includes(item.key));
+
+  //     setAvailableIdOverrides(avalIdOverrides);
+  //     setAvailableItems(items);
+  //   }
+  // }, [idOverridesQuery.data, idOverridesQuery.isFetching]);
+
+  // Load available data to show in the 'Add' modal
+  const idViewsQuery = useGetIdViewsQuery();
+
   React.useEffect(() => {
-    if (showAddModal) {
-      idOverridesQuery.refetch();
+    if (idViewsQuery.data && !idViewsQuery.isFetching) {
+      console.log("idViewsQuery.data", idViewsQuery.data);
     }
-  }, [showAddModal, adderSearchValue, props.entity]);
+  }, [idViewsQuery.data, idViewsQuery.isFetching]);
 
-  // Update available User ID overrides
-  React.useEffect(() => {
-    if (idOverridesQuery.data && !idOverridesQuery.isFetching) {
-      // transform data to User ID overrides
-      const count = idOverridesQuery.data.result.count;
-      const results = idOverridesQuery.data.result.results;
-      let items: AvailableItems[] = [];
-      const avalIdOverrides: UserIDOverride[] = [];
-      for (let i = 0; i < count; i++) {
-        const idOverride = apiToUserIDOverride(results[i].result);
-        avalIdOverrides.push(idOverride);
-        items.push({
-          key: idOverride.uid,
-          title: idOverride.uid,
-        });
-      }
-      items = items.filter((item) => !member_idoverrideuser.includes(item.key));
+  // const availableIdOverridesQuery = useGetUserIdOverridesInfoByGroupQuery(
+  //   props.id
+  // );
 
-      setAvailableIdOverrides(avalIdOverrides);
-      setAvailableItems(items);
-    }
-  }, [idOverridesQuery.data, idOverridesQuery.isFetching]);
+  // React.useEffect(() => {
+  //   if (
+  //     availableIdOverridesQuery.data &&
+  //     !availableIdOverridesQuery.isFetching
+  //   ) {
+  //     console.log(
+  //       "availableIdOverridesQuery.data",
+  //       availableIdOverridesQuery.data
+  //     );
+  //     // // transform data to User ID overrides
+  //     // const count = idOverridesQuery.data.result.count;
+  //     // const results = idOverridesQuery.data.result.results;
+  //     // let items: AvailableItems[] = [];
+  //     // const avalIdOverrides: UserIDOverride[] = [];
+  //     // for (let i = 0; i < count; i++) {
+  //     //   const idOverride = apiToUserIDOverride(results[i].result);
+  //     //   avalIdOverrides.push(idOverride);
+  //     //   items.push({
+  //     //     key: idOverride.uid,
+  //     //     title: idOverride.uid,
+  //     //   });
+  //     // }
+  //     // items = items.filter((item) => !member_idoverrideuser.includes(item.key));
+  //     // setAvailableIdOverrides(avalIdOverrides);
+  //     // setAvailableItems(items);
+  //   }
+  // }, [availableIdOverridesQuery.data, availableIdOverridesQuery.isFetching]);
 
   // Add
   const onAddIdOverride = (items: AvailableItems[]) => {
@@ -350,18 +396,18 @@ const MembersUserIDOverrides = (props: PropsToMembersUserIDOverrides) => {
         onSetPage={(_e, page) => setPage(page)}
         onPerPageSelect={(_e, perPage) => setPerPage(perPage)}
       />
-      {showAddModal && (
-        // TODO: Needs a custom add modal
-        // <MemberOfAddModal
-        //   showModal={showAddModal}
-        //   onCloseModal={() => setShowAddModal(false)}
-        //   availableItems={availableItems}
-        //   onAdd={onAddIdOverride}
-        //   onSearchTextChange={setAdderSearchValue}
-        //   title={"Assign User Id Overrides to " + entityType + " " + props.id}
-        //   ariaLabel={"Add " + entityType + " of User Id Override modal"}
-        // />
-      )}
+      {/* showAddModal && (
+        TODO: Needs a custom add modal
+        <MemberOfAddModal
+          showModal={showAddModal}
+          onCloseModal={() => setShowAddModal(false)}
+          availableItems={availableItems}
+          onAdd={onAddIdOverride}
+          onSearchTextChange={setAdderSearchValue}
+          title={"Assign User Id Overrides to " + entityType + " " + props.id}
+          ariaLabel={"Add " + entityType + " of User Id Override modal"}
+        />
+      ) */}
       {showDeleteModal && someItemSelected && (
         <MemberOfDeleteModal
           showModal={showDeleteModal}
