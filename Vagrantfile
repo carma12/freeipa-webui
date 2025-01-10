@@ -3,7 +3,9 @@
 
 Vagrant.configure("2") do |config|
   config.vm.hostname = "server.ipa.demo"
-  config.vm.box = "fedora/39-cloud-base"
+  config.vm.box = "fedora/40-cloud-base"
+  # config.vm.box_download_checksum = "ff735a9f17075145db8378f5884e35bd98f19a7ac828a1d9157021106a035809"
+  # config.vm.box_download_checksum_type = "sha256"
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder ".", "/usr/src/freeipa-webui"
