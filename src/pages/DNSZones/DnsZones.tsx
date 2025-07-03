@@ -475,7 +475,7 @@ const DnsZones = () => {
                   hasCheckboxes={true}
                   pathname="dns-zones"
                   showTableRows={showTableRows}
-                  showLink={false}
+                  showLink={true}
                   elementsData={{
                     isElementSelectable: isDnsZoneSelectable,
                     selectedElements,
