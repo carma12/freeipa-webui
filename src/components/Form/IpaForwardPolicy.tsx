@@ -12,40 +12,19 @@ const IpaForwardPolicy = (props: IPAParamDefinition) => {
   const { readOnly, value } = getParamProperties(props);
 
   // States
-  const [isFwdFirstChecked, setIsFwdFirstChecked] = React.useState<boolean>(
-    value === "first"
-  );
-  const [isFwdOnlyChecked, setIsFwdOnlyChecked] = React.useState<boolean>(
-    value === "only"
-  );
+  const [option, setOption] = React.useState<string>(value as string);
 
-  const [isFwdingDisabled, setIsFwdingDisabled] = React.useState<boolean>(
-    value === "none"
-  );
-
-  React.useEffect(() => {
-    validateChange(value as string);
-  }, [value]);
-
-  // Manage radio button changes
-  const validateChange = (newValue: string) => {
+  // Handle radio button changes
+  const handleRadioChange = (newValue: string) => {
+    setOption(newValue);
     if (props.ipaObject && props.onChange) {
-      if (newValue === "first") {
-        setIsFwdFirstChecked(true);
-        setIsFwdOnlyChecked(false);
-        setIsFwdingDisabled(false);
-      } else if (newValue === "only") {
-        setIsFwdFirstChecked(false);
-        setIsFwdOnlyChecked(true);
-        setIsFwdingDisabled(false);
-      } else if (newValue === "none") {
-        setIsFwdFirstChecked(false);
-        setIsFwdOnlyChecked(false);
-        setIsFwdingDisabled(true);
-      }
       updateIpaObject(props.ipaObject, props.onChange, newValue, props.name);
     }
   };
+
+  React.useEffect(() => {
+    handleRadioChange(value as string);
+  }, [value]);
 
   return (
     <Flex>
@@ -53,36 +32,36 @@ const IpaForwardPolicy = (props: IPAParamDefinition) => {
         <Radio
           id={"forward-first"}
           key={"forward-first"}
-          name={props.name + "-first"}
+          name={props.name}
           label={"Forward first"}
           value={"first"}
           readOnly={readOnly}
-          onChange={() => validateChange("first")}
-          isChecked={isFwdFirstChecked}
+          onChange={() => handleRadioChange("first")}
+          isChecked={option === "first"}
         />
       </FlexItem>
       <FlexItem>
         <Radio
           id={"forward-only"}
           key={"forward-only"}
-          name={props.name + "-only"}
+          name={props.name}
           label={"Forward only"}
           value={"only"}
           readOnly={readOnly}
-          onChange={() => validateChange("only")}
-          isChecked={isFwdOnlyChecked}
+          onChange={() => handleRadioChange("only")}
+          isChecked={option === "only"}
         />
       </FlexItem>
       <FlexItem>
         <Radio
           id={"forwarding-disabled"}
           key={"forwarding-disabled"}
-          name={props.name + "-none"}
+          name={props.name}
           label={"Forwarding disabled"}
           value={"none"}
           readOnly={readOnly}
-          onChange={() => validateChange("none")}
-          isChecked={isFwdingDisabled}
+          onChange={() => handleRadioChange("none")}
+          isChecked={option === "none"}
         />
       </FlexItem>
     </Flex>
