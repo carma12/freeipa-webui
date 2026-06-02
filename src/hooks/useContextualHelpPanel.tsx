@@ -1,14 +1,12 @@
 import { useState, useCallback, useMemo } from "react";
+// Components
+import { ContextualHelpPanelProps } from "src/components/ContextualHelpPanel/ContextualHelpPanel";
 
 interface UseContextualHelpPanelOptions {
   defaultPage?: string;
 }
 
-interface ContextualHelpPanelProps {
-  fromPage: string;
-  isExpanded: boolean;
-  onClose: () => void;
-}
+type PanelProps = Omit<ContextualHelpPanelProps, "children">;
 
 interface UseContextualHelpPanelReturn {
   isExpanded: boolean;
@@ -16,10 +14,10 @@ interface UseContextualHelpPanelReturn {
   toggle: () => void;
   close: () => void;
   changePage: (page: string) => void;
-  panelProps: ContextualHelpPanelProps;
+  panelProps: PanelProps;
 }
 
-export function useContextualHelpPanel(
+function useContextualHelpPanel(
   options: UseContextualHelpPanelOptions = {}
 ): UseContextualHelpPanelReturn {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -37,7 +35,7 @@ export function useContextualHelpPanel(
     setFromPage(page);
   }, []);
 
-  const panelProps = useMemo<ContextualHelpPanelProps>(
+  const panelProps = useMemo<PanelProps>(
     () => ({
       fromPage,
       isExpanded,

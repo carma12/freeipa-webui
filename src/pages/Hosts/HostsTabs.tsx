@@ -16,7 +16,7 @@ import BreadCrumb, { BreadCrumbItem } from "src/components/layouts/BreadCrumb";
 import { Host } from "src/utils/datatypes/globalDataTypes";
 // Hooks
 import { useHostSettings } from "src/hooks/useHostSettingsData";
-import { useContextualHelpPanel } from "src/hooks/useContextualHelpPanel";
+import useContextualHelpPanel from "src/hooks/useContextualHelpPanel";
 // Redux
 import { useAppDispatch } from "src/store/hooks";
 import { updateBreadCrumbPath } from "src/store/Global/routes-slice";

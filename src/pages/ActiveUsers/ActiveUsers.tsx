@@ -43,7 +43,7 @@ import DisableEnableUsers from "src/components/modals/UserModals/DisableEnableUs
 import { addAlert } from "src/store/Global/alerts-slice";
 import useUpdateRoute from "src/hooks/useUpdateRoute";
 import useListPageSearchParams from "src/hooks/useListPageSearchParams";
-import { useContextualHelpPanel } from "src/hooks/useContextualHelpPanel";
+import useContextualHelpPanel from "src/hooks/useContextualHelpPanel";
 // Utils
 import { API_VERSION_BACKUP, isUserSelectable } from "src/utils/utils";
 // RPC client

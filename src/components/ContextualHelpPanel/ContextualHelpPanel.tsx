@@ -23,7 +23,7 @@ interface DocLink {
   url: string;
 }
 
-interface ContextualHelpPanelProps {
+export interface ContextualHelpPanelProps {
   fromPage?: string;
   isExpanded: boolean;
   onClose: () => void;
@@ -82,7 +82,13 @@ const ContextualHelpPanel = (props: ContextualHelpPanelProps) => {
           <DrawerCloseButton onClick={props.onClose} />
         </DrawerActions>
         <DrawerPanelBody id="contextual-help-panel-body">
-          <List isPlain>{listOfDocLinks}</List>
+          {urlList.length > 0 ? (
+            <List isPlain>{listOfDocLinks}</List>
+          ) : (
+            <Content component="p" className="pf-v6-u-color-200">
+              No documentation links available for this page.
+            </Content>
+          )}
         </DrawerPanelBody>
       </DrawerHead>
     </DrawerPanelContent>

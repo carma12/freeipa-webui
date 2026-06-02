@@ -20,7 +20,7 @@ import ContextualHelpPanel from "src/components/ContextualHelpPanel/ContextualHe
 import DataSpinner from "src/components/layouts/DataSpinner";
 // Hooks
 import { useUserSettings } from "src/hooks/useUserSettingsData";
-import { useContextualHelpPanel } from "src/hooks/useContextualHelpPanel";
+import useContextualHelpPanel from "src/hooks/useContextualHelpPanel";
 // Icons
 import { LockIcon } from "@patternfly/react-icons";
 // Redux
