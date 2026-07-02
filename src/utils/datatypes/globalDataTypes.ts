@@ -211,6 +211,11 @@ export interface Role {
   dn: string;
 }
 
+export interface Privilege {
+  cn: string;
+  description: string;
+}
+
 export interface HBACRulesOld {
   name: string;
   status: string;
