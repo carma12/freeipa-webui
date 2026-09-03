@@ -211,5 +211,6 @@
   ],
   "roles-settings": [],
   "privileges-settings": [],
+  "permissions-settings": [],
   "selfservice-permissions-settings": []
 }
