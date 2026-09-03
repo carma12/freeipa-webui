@@ -1,7 +1,28 @@
 // Data types
 import { Permission } from "src/utils/datatypes/globalDataTypes";
+import { SelectOptionProps } from "src/components/layouts/SimpleSelector";
 // Utils
 import { convertApiObj } from "./ipaObjectUtils";
+
+export const BIND_RULE_OPTIONS: SelectOptionProps[] = [
+  { key: "permission", value: "permission" },
+  { key: "all", value: "all" },
+  { key: "anonymous", value: "anonymous" },
+  { key: "self", value: "self" },
+];
+
+// Objects that share names with others but shouldn't be user-selectable
+export const FILTERED_OBJECTS: readonly string[] = ["automember_default_group"];
+
+export const GRANTED_RIGHTS_OPTIONS = [
+  { value: "read", text: "read" },
+  { value: "search", text: "search" },
+  { value: "compare", text: "compare" },
+  { value: "write", text: "write" },
+  { value: "add", text: "add" },
+  { value: "delete", text: "delete" },
+  { value: "all", text: "all" },
+];
 
 export const asRecord = (
   element: Partial<Permission>,

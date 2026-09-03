@@ -18,6 +18,10 @@ import { addAlert } from "src/store/Global/alerts-slice";
 import { SerializedError } from "@reduxjs/toolkit";
 import { useGetObjectMetadataQuery } from "src/services/rpc";
 import { Metadata } from "src/utils/datatypes/globalDataTypes";
+import {
+  BIND_RULE_OPTIONS,
+  FILTERED_OBJECTS,
+} from "src/utils/permissionsUtils";
 import TextInputList from "src/components/Form/TextInputList";
 import { TypeAheadWithCheckbox } from "src/components/TypeAheadWithCheckbox";
 import { useFindGroupsQuery } from "src/services/rpcUserGroups";
@@ -30,17 +34,6 @@ interface PropsToAddModal {
   title: string;
   onRefresh: () => void;
 }
-
-const BIND_RULE_OPTIONS: SelectOptionProps[] = [
-  { key: "permission", value: "permission" },
-  { key: "all", value: "all" },
-  { key: "anonymous", value: "anonymous" },
-  { key: "self", value: "self" },
-];
-
-// There are records, that have the same name as others
-// but shouldn't really be used by the user, remove these.
-const FILTERED_OBJECTS: readonly string[] = ["automember_default_group"];
 
 const generateTypes = (metadata: Metadata | undefined) => {
   if (!metadata) {

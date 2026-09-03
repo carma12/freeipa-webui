@@ -53,6 +53,7 @@ describe("IpaSimpleSelector Component", () => {
   };
 
   const defaultProps: IPAParamDefinitionSimpleSelector = {
+    id: "ipapermbindruletype",
     dataCy: "ipa-simple-selector",
     name: "ipapermbindruletype",
     ariaLabel: "ipapermbindruletype",
